@@ -1,5 +1,29 @@
 frontend/node_modules
 frontend/.editorconfig
+frontend/.idea/
 
-rest/.idea
-rest/.mvn
+/rest/target/
+rest/!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+/rest/.apt_generated
+/rest/.classpath
+/rest/.factorypath
+/rest/.project
+/rest/.settings
+/rest/.springBeans
+/rest/.sts4-cache
+
+### IntelliJ IDEA ###
+/rest/.idea
+/rest/*.iws
+/rest/*.iml
+/rest/*.ipr
+
+### NetBeans ###
+/rest/nbproject/private/
+/rest/build/
+/rest/nbbuild/
+/rest/dist/
+/rest/nbdist/
+/rest/.nb-gradle/
