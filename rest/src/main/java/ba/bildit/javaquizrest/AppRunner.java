@@ -17,7 +17,7 @@ import java.util.List;
 
 @Profile("dev")
 @Component
-public class TestCLRunner implements ApplicationRunner {
+public class AppRunner implements ApplicationRunner {
 
     @Autowired
     private QuestionDAO questionDAO;
@@ -36,7 +36,7 @@ public class TestCLRunner implements ApplicationRunner {
     }
 
     private void dataBaseInit() {
-        
+
         Section section1 = new Section("SELECTIONS");
         Section section2 = new Section("LOOPS");
         Section section3 = new Section("METHODS");
