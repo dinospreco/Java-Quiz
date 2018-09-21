@@ -29,6 +29,13 @@ public class Question {
         this.section = section;
     }
 
+    public Question(String question, boolean snippet, Section section, List<Answer> answers) {
+        this.question = question;
+        this.snippet = snippet;
+        this.section = section;
+        this.answers = answers;
+    }
+
     @Override
     public String toString() {
         return "Question{" +

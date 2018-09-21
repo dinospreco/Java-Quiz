@@ -6,6 +6,7 @@ import ba.bildit.javaquizrest.dao.SectionDAO;
 import ba.bildit.javaquizrest.entities.Answer;
 import ba.bildit.javaquizrest.entities.Question;
 import ba.bildit.javaquizrest.entities.Section;
+import ba.bildit.javaquizrest.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -28,8 +29,38 @@ public class AppRunner implements ApplicationRunner {
     @Autowired
     private AnswerDAO answerDAO;
 
+    @Autowired
+    private QuestionService questionService;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        Section section1 = new Section("SELECTIONS");
+
+        Answer answer1 = new Answer("Pre-test and post-test", true);
+        Answer answer2 = new Answer("Good and bad", false);
+        Answer answer3 = new Answer("Fast and slow", false);
+        Answer answer4 = new Answer("for and while", false);
+        List<Answer> answers = new ArrayList<>();
+        answers.add(answer1);
+        answers.add(answer2);
+        answers.add(answer3);
+        answers.add(answer4);
+
+        Question question = new Question("What types of loops Java have?", false, section1, answers);
+
+        try {
+            Question savedQuestion = questionService.saveQuestion(question);
+            System.out.println("");
+            System.out.println("");
+            System.out.println("Question: " + question.toString());
+            System.out.println("");
+            System.out.println("Saved Question: " + savedQuestion.toString());
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
 
 //        dataBaseInit();
 

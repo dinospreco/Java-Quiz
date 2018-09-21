@@ -23,20 +23,21 @@ public class QuestionService {
     @Autowired
     private SectionDAO sectionDAO;
 
-    public Question saveQuestion(Question question) {
-        saveSection(question.getSection());
-        saveQuestionWithoutAnswers(question);
+    public Question saveQuestion(Question question) throws IllegalArgumentException {
+        validateQuestion(question);
+        saveSection(question);
         saveAnswers(question);
         return questionDAO.save(question);
     }
 
-    private Section saveSection(Section section) {
-        Section checkedSection = sectionDAO.getSectionBySection(section.getSection());
+    private Section saveSection(Question question) {
+        Section checkedSection = sectionDAO.getSectionBySection(question.getSection().getSection());
 
         if (checkedSection != null) {
+            question.setSection(checkedSection);
             return checkedSection;
         } else {
-            return sectionDAO.save(section);
+            return sectionDAO.save(question.getSection());
         }
     }
 
@@ -57,6 +58,20 @@ public class QuestionService {
 
     private Question saveQuestionWithoutAnswers(Question question) {
         return questionDAO.save(question);
+    }
+
+    private boolean validateQuestion(Question question) throws IllegalArgumentException {
+        return validateSection(question) && validateAnswersList(question.getAnswers());
+    }
+
+    private boolean validateSection(Question question) throws IllegalArgumentException {
+        if (question.getSection() == null) {
+            throw new IllegalArgumentException("Question section is null. Section must be initialized");
+        }
+        else if (question.getSection().getSection().equals("") || question.getSection().getSection() == null) {
+            throw new IllegalArgumentException("Question section cannot be empty string");
+        }
+        return true;
     }
 
     private boolean validateAnswersList(List<Answer> answers) throws IllegalArgumentException {

@@ -19,6 +19,11 @@ public class Answer {
     @ManyToOne
     private Question question;
 
+    public Answer(String answer, boolean correctAnswer) {
+        this.answer = answer;
+        this.correctAnswer = correctAnswer;
+    }
+
     public Answer(String answer, boolean correctAnswer, Question question) {
         this.answer = answer;
         this.correctAnswer = correctAnswer;
