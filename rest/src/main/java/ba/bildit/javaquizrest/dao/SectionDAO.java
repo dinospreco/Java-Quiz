@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SectionDAO extends JpaRepository<Section, Long> {
+
+    public Section getSectionBySection(String section);
+
 }
