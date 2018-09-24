@@ -15,7 +15,7 @@ public class Question {
 
     private String question;
 
-    private boolean snippet;
+    private String snippet;
 
     @ManyToOne
     private Section section;
@@ -23,13 +23,13 @@ public class Question {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "question")
     private List<Answer> answers;
 
-    public Question(String question, boolean snippet, Section section) {
+    public Question(String question, String snippet, Section section) {
         this.question = question;
         this.snippet = snippet;
         this.section = section;
     }
 
-    public Question(String question, boolean snippet, Section section, List<Answer> answers) {
+    public Question(String question, String snippet, Section section, List<Answer> answers) {
         this.question = question;
         this.snippet = snippet;
         this.section = section;
