@@ -14,7 +14,7 @@
         <div class="col-md-4" [hidden]="hasNewSection" (change)="enterNewSection()" >
           <select class="form-control" id="section" name="section" [(ngModel)]="selectedSection" >
             <option *ngFor="let section of sections">{{section.section}}</option>
-            <option>Nova oblast</option>
+            <option>{{newSectionOptionText}}</option>
           </select>
         </div>
 
