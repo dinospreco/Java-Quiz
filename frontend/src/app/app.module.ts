@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import {SectionService} from './services/section.service';
 import {HttpClientModule} from '@angular/common/http';
+import {QuestionService} from './services/question.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    SectionService
+    SectionService,
+    QuestionService
   ],
   bootstrap: [AppComponent]
 })
