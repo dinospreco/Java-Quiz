@@ -17,19 +17,23 @@ public class Question {
 
     private String snippet;
 
+    private int difficulty;
+
     @ManyToOne
     private Section section;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "question")
     private List<Answer> answers;
 
-    public Question(String question, String snippet, Section section) {
+    public Question(String question, String snippet, Section section, int difficulty) {
+        this.difficulty = difficulty;
         this.question = question;
         this.snippet = snippet;
         this.section = section;
     }
 
-    public Question(String question, String snippet, Section section, List<Answer> answers) {
+    public Question(String question, String snippet, Section section, int difficulty, List<Answer> answers) {
+        this.difficulty = difficulty;
         this.question = question;
         this.snippet = snippet;
         this.section = section;

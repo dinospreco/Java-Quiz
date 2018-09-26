@@ -1,76 +1,108 @@
-<div class="container">
-  <form>
+<div class="card">
 
-    <div class="form-group row">
-
-      <label for="section" class="col-md-1 col-form-label">Oblast:</label>
-      <div class="col-md-5" [hidden]="newSection" (change)="enterNewSection()">
-        <select class="form-control" id="section" name="section" [(ngModel)]="selectedSection" >
-          <option *ngFor="let section of sections">{{section.section}}</option>
-          <option>Nova oblast</option>
-        </select>
-      </div>
-
-      <div class="col-md-4" [hidden]="!newSection">
-        <input class="form-control" id="newSection" placeholder="Klikni da uneses novu oblast">
-      </div>
-      <div class="col-md-1" [hidden]="!newSection">
-        <button class="btn btn-primary" (click)="cancelNewSection()">Cancel</button>
-      </div>
-
-
-
-      <label for="difficulty" class="col-md-1 col-form-label">Težina: {{difficulty}}</label>
-      <div class="col-md-5">
-        <input type="range" class="form-control-range" id="difficulty" name="difficulty" min="1" max="5" [(ngModel)]="difficulty" (ngModelChange)="difficulty=$event">
-      </div>
-
+  <div class="card-body">
+    <div class="card-title">
+      <h1>Dodaj pitanje</h1>
     </div>
+    <div class="container">
+      <form method="post">
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="question">Pitanje</label>
-          <textarea class="form-control" id="question" rows="2"></textarea>
+      <div class="form-group row">
+
+        <!--Section Input-->
+        <label for="section" class="col-md-2 col-form-label">Oblast:</label>
+        <div class="col-md-4" [hidden]="hasNewSection" (change)="enterNewSection()" >
+          <select class="form-control" id="section" name="section" [(ngModel)]="selectedSection" >
+            <option *ngFor="let section of sections">{{section.section}}</option>
+            <option>Nova oblast</option>
+          </select>
         </div>
+
+        <div class="col-md-3" [hidden]="!hasNewSection">
+          <input class="form-control" id="newSection" placeholder="Klikni da uneses novu oblast" [(ngModel)]="newSection" name="newSection">
+        </div>
+        <div class="col-md-1" [hidden]="!hasNewSection">
+          <button class="btn btn-outline-danger" (click)="cancelNewSection()">Cancel</button>
+        </div>
+        <!--End of Section Input-->
+
+        <!--Difficulty Input-->
+        <label for="difficulty" class="col-md-2 col-form-label">Težina: </label>
+        <div class="col-md-1 difficulty"> {{difficulty}} </div>
+        <div class="col-md-3">
+          <input type="range" class="form-control-range" id="difficulty" name="difficulty" min="1" max="5" [(ngModel)]="difficulty" (ngModelChange)="difficulty=$event">
+        </div>
+        <!--End of Difficulty Input-->
       </div>
 
-      <!--<div class="col-md-12 snippet">-->
-        <!--<label for="snippetCode">Snippet</label>-->
-        <!--<ngx-codemirror [(ngModel)]="codePreview" [options]="{ lineNumbers: true, theme: 'idea', mode: 'text/x-java'}" id="snippetCode"></ngx-codemirror>-->
-      <!--</div>-->
+      <div class="row">
 
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="answer1">Tačan odgovor</label>
-          <textarea class="form-control" id="answer1" rows="1"></textarea>
+        <!--Question Input-->
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="question">Pitanje</label>
+            <textarea class="form-control" id="question" rows="2" [(ngModel)]="question" name="question"></textarea>
+          </div>
         </div>
+        <!--End of Question Input-->
+
+        <!--Snippet Input-->
+        <div class="col-md-12 snippet">
+          <label for="snippetCode">Snippet</label> <a (click)="toggleSnippetAreaVisibility()"> ({{hideSnippetAreaText}})</a>
+          <ngx-codemirror
+            [(ngModel)]="snippetCode"
+            [options]="{
+              lineNumbers: true,
+              theme: 'idea',
+              mode: 'text/x-java'
+            }"
+            id="snippetCode"
+            name="snippetCode"
+            [hidden] = "hideSnippetArea"
+          ></ngx-codemirror>
+        </div>
+        <!--End of Snippet Input-->
+
       </div>
 
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="answer2">Varka 1</label>
-          <textarea class="form-control" id="answer2" rows="1"></textarea>
+      <div class="row">
+
+        <!--Correct Answer Input-->
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="correctAnswer">Tačan odgovor</label>
+            <textarea class="form-control" id="correctAnswer" rows="1" [(ngModel)]="correctAnswer" name="correctAnswer"></textarea>
+          </div>
         </div>
+        <!--End of Correct Answer Input-->
+
+        <!--Answer Options-->
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="answerOption1">Varka 1</label>
+            <textarea class="form-control" id="answerOption1" rows="1" [(ngModel)]="answerOption1" name="answerOption1"></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="answerOption2">Varka 2</label>
+            <textarea class="form-control" id="answerOption2" rows="1" [(ngModel)]="answerOption2" name="answerOption2"></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="answerOption3">Varka 3</label>
+            <textarea class="form-control" id="answerOption3" rows="1" [(ngModel)]="answerOption3" name="answerOption3"></textarea>
+          </div>
+        </div>
+        <!--End of Answer Options-->
       </div>
 
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="answer3">Varka 2</label>
-          <textarea class="form-control" id="answer3" rows="1"></textarea>
-        </div>
-      </div>
+      <button class="btn btn-outline-success btn-block" type="submit" (click)="submit()">Dodaj</button>
 
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="answer4">Varka 3</label>
-          <textarea class="form-control" id="answer4" rows="1"></textarea>
-        </div>
-      </div>
-    </div>
-
-  </form>
+    </form>
+  </div>
+  </div>
 </div>

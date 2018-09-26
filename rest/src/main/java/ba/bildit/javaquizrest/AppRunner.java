@@ -76,7 +76,7 @@ public class AppRunner implements ApplicationRunner {
         sectionDAO.save(section2);
         sectionDAO.save(section3);
 
-        Question question1 = new Question("What types of loops Java have?", "", section2);
+        Question question1 = new Question("What types of loops Java have?", "",  section2, 1);
         questionDAO.save(question1);
 
         Answer answer1 = new Answer("Pre-test and post-test", true, question1);
@@ -89,7 +89,7 @@ public class AppRunner implements ApplicationRunner {
 
         answerDAO.saveAll(answers);
 
-        Question question2 = new Question("Another question?", "", section1);
+        Question question2 = new Question("Another question?", "", section1, 2);
         questionDAO.save(question2);
 
         Answer answer11 = new Answer("This is correct answer", true, question2);
@@ -102,7 +102,7 @@ public class AppRunner implements ApplicationRunner {
 
         answerDAO.saveAll(answers1);
 
-        Question question21 = new Question("Another question?", "", section1);
+        Question question21 = new Question("Another question?", "", section1, 3);
         questionDAO.save(question21);
 
         Answer answer111 = new Answer("This is correct answer 1", true, question21);
