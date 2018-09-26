@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-
+import {Section} from '../dto/section';
 
 @Component({
   selector: 'app-add-question',
@@ -8,17 +8,29 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class AddQuestionComponent implements OnInit {
   difficulty: number;
-  snippet: boolean;
-  @Input() codePreview = 'public class Test {}';
-
+  codePreview = 'public class Test {}';
+  selectedSection: String;
+  newSection: boolean;
+  @Input() sections: Section[];
+  constructor() {
+  }
   ngOnInit(): void {
     this.difficulty = 3;
-    this.snippet = false;
     this.codePreview = 'public class Test {}';
+    this.newSection = false;
   }
-  toggleSnippet() {
-    this.snippet = !this.snippet;
+  enterNewSection() {
+    if (this.selectedSection === 'Nova oblast') {
+      this.selectedSection = '';
+      this.toggleNewSection();
+    }
   }
-
+  cancelNewSection() {
+    this.selectedSection = this.sections[0].section;
+    this.toggleNewSection();
+  }
+  toggleNewSection() {
+    this.newSection = !this.newSection;
+  }
 
 }

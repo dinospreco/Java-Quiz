@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { AddQuestionComponent } from './question/add.question/add.question.component';
 import { FormsModule } from '@angular/forms';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import {SectionService} from './services/section.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,12 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
   imports: [
     BrowserModule,
     FormsModule,
-    CodemirrorModule
+    CodemirrorModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    SectionService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
