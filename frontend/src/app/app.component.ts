@@ -10,8 +10,6 @@ import {Section} from './question/dto/section';
 })
 export class AppComponent {
   title = 'Java Quiz';
-  $sections: Observable<Section[]>;
-  constructor(private sectionService: SectionService) {
-        this.$sections = this.sectionService.getAllSections();
+  constructor() {
   }
 }

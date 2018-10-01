@@ -62,21 +62,21 @@ public class QuestionService {
         return questionDAO.save(question);
     }
 
-    private boolean validateQuestion(Question question) {
+    private boolean validateQuestion(Question question) throws IllegalArgumentException {
+        if (question.getQuestion() == null || question.getQuestion().trim().length() == 0) {
+            throw new IllegalArgumentException("Question cannot be null or empty string");
+        }
         return validateSection(question) && validateAnswersList(question.getAnswers());
     }
 
     private boolean validateSection(Question question) {
-        if (question.getSection() == null) {
-            throw new IllegalArgumentException("Question section is null. Section must be initialized");
-        }
-        else if (question.getSection().getSection().equals("") || question.getSection().getSection() == null) {
-            throw new IllegalArgumentException("Question section cannot be empty string");
+        if (question.getSection() == null || question.getSection().getSection().trim().length() == 0) {
+            throw new IllegalArgumentException("Section cannot be null or empty string");
         }
         return true;
     }
 
-    private boolean validateAnswersList(List<Answer> answers) {
+    private boolean validateAnswersList(List<Answer> answers) throws IllegalArgumentException {
 
         //Check if answers list have at least 4 elements;
         if (answers.size() < 4) {

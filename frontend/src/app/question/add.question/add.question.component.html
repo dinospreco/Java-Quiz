@@ -22,7 +22,7 @@
           <input class="form-control" id="newSection" placeholder="Klikni da uneses novu oblast" [(ngModel)]="newSection" name="newSection">
         </div>
         <div class="col-md-1" [hidden]="!hasNewSection">
-          <button class="btn btn-outline-danger" (click)="cancelNewSection()" [disabled]="noSections">Cancel</button>
+          <button class="btn btn-outline-danger" (mouseup)="cancelNewSection()" [disabled]="noSections">Cancel</button>
         </div>
         <!--End of Section Input-->
 
