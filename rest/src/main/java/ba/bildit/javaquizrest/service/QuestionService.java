@@ -3,6 +3,7 @@ package ba.bildit.javaquizrest.service;
 import ba.bildit.javaquizrest.dao.AnswerDAO;
 import ba.bildit.javaquizrest.dao.QuestionDAO;
 import ba.bildit.javaquizrest.dao.SectionDAO;
+import ba.bildit.javaquizrest.dto.QuestionDTO;
 import ba.bildit.javaquizrest.entities.Answer;
 import ba.bildit.javaquizrest.entities.Question;
 import ba.bildit.javaquizrest.entities.Section;
@@ -23,7 +24,8 @@ public class QuestionService {
     @Autowired
     private SectionDAO sectionDAO;
 
-    public Question saveQuestion(Question question) throws IllegalArgumentException {
+    public Question saveQuestion(QuestionDTO questionDTO) {
+        Question question = new Question(questionDTO);
         validateQuestion(question);
         saveSection(question);
         saveAnswers(question);
@@ -41,7 +43,7 @@ public class QuestionService {
         }
     }
 
-    private List<Answer> saveAnswers(Question question) throws IllegalArgumentException {
+    private List<Answer> saveAnswers(Question question) {
 
         validateAnswersList(question.getAnswers());
 
@@ -60,11 +62,11 @@ public class QuestionService {
         return questionDAO.save(question);
     }
 
-    private boolean validateQuestion(Question question) throws IllegalArgumentException {
+    private boolean validateQuestion(Question question) {
         return validateSection(question) && validateAnswersList(question.getAnswers());
     }
 
-    private boolean validateSection(Question question) throws IllegalArgumentException {
+    private boolean validateSection(Question question) {
         if (question.getSection() == null) {
             throw new IllegalArgumentException("Question section is null. Section must be initialized");
         }
@@ -74,7 +76,7 @@ public class QuestionService {
         return true;
     }
 
-    private boolean validateAnswersList(List<Answer> answers) throws IllegalArgumentException {
+    private boolean validateAnswersList(List<Answer> answers) {
 
         //Check if answers list have at least 4 elements;
         if (answers.size() < 4) {
@@ -82,13 +84,15 @@ public class QuestionService {
         }
 
         //Check if answers list have 1 correct answer
+        boolean foundCorrectAnswer = false;
         for (Answer answer : answers) {
             if (answer.isCorrectAnswer()) {
-                return true;
+                foundCorrectAnswer = true;
+                break;
             }
-            else {
-                throw new IllegalArgumentException("Answer list must have at least 1 correct answer!");
-            }
+        }
+        if(!foundCorrectAnswer) {
+            throw new IllegalArgumentException("Answer list must have at least 1 correct answer");
         }
 
         return true;

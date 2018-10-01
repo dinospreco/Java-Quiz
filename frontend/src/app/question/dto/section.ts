@@ -1,3 +1,6 @@
-export interface Section {
+export class Section {
   section: string;
+  constructor(section: string) {
+    this.section = section;
+  }
 }

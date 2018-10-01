@@ -5,15 +5,15 @@
       <h1>Dodaj pitanje</h1>
     </div>
     <div class="container">
-      <form method="post">
+      <form>
 
       <div class="form-group row">
 
         <!--Section Input-->
         <label for="section" class="col-md-2 col-form-label">Oblast:</label>
-        <div class="col-md-4" [hidden]="hasNewSection" (change)="enterNewSection()" >
-          <select class="form-control" id="section" name="section" [(ngModel)]="selectedSection" >
-            <option *ngFor="let section of sections">{{section.section}}</option>
+        <div class="col-md-4" [hidden]="hasNewSection" >
+          <select class="form-control" id="section" name="section" [(ngModel)]="existingSection" (change)="checkIfNewSectionIsBeingAdded()">
+            <option *ngFor="let section of sections" value="{{section.section}}">{{section.section}}</option>
             <option>{{newSectionOptionText}}</option>
           </select>
         </div>
@@ -22,15 +22,15 @@
           <input class="form-control" id="newSection" placeholder="Klikni da uneses novu oblast" [(ngModel)]="newSection" name="newSection">
         </div>
         <div class="col-md-1" [hidden]="!hasNewSection">
-          <button class="btn btn-outline-danger" (click)="cancelNewSection()">Cancel</button>
+          <button class="btn btn-outline-danger" (click)="cancelNewSection()" [disabled]="noSections">Cancel</button>
         </div>
         <!--End of Section Input-->
 
         <!--Difficulty Input-->
         <label for="difficulty" class="col-md-2 col-form-label">Težina: </label>
-        <div class="col-md-1 difficulty"> {{difficulty}} </div>
+        <div class="col-md-1 difficulty"> {{question.difficulty}} </div>
         <div class="col-md-3">
-          <input type="range" class="form-control-range" id="difficulty" name="difficulty" min="1" max="5" [(ngModel)]="difficulty" (ngModelChange)="difficulty=$event">
+          <input type="range" class="form-control-range" id="difficulty" name="difficulty" min="1" max="5" [(ngModel)]="question.difficulty" (ngModelChange)="difficulty=$event">
         </div>
         <!--End of Difficulty Input-->
       </div>
@@ -41,7 +41,7 @@
         <div class="col-md-12">
           <div class="form-group">
             <label for="question">Pitanje</label>
-            <textarea class="form-control" id="question" rows="2" [(ngModel)]="question" name="question"></textarea>
+            <textarea class="form-control" id="question" rows="2" [(ngModel)]="question.question" name="question"></textarea>
           </div>
         </div>
         <!--End of Question Input-->
@@ -50,7 +50,7 @@
         <div class="col-md-12 snippet">
           <label for="snippetCode">Snippet</label> <a (click)="toggleSnippetAreaVisibility()"> ({{hideSnippetAreaText}})</a>
           <ngx-codemirror
-            [(ngModel)]="snippetCode"
+            [(ngModel)]="question.snippet"
             [options]="{
               lineNumbers: true,
               theme: 'idea',
@@ -65,42 +65,9 @@
 
       </div>
 
-      <div class="row">
+        <app-add-answers-list></app-add-answers-list>
 
-        <!--Correct Answer Input-->
-        <div class="col-md-12">
-          <div class="form-group">
-            <label for="correctAnswer">Tačan odgovor</label>
-            <textarea class="form-control" id="correctAnswer" rows="1" [(ngModel)]="correctAnswer" name="correctAnswer"></textarea>
-          </div>
-        </div>
-        <!--End of Correct Answer Input-->
-
-        <!--Answer Options-->
-        <div class="col-md-12">
-          <div class="form-group">
-            <label for="answerOption1">Varka 1</label>
-            <textarea class="form-control" id="answerOption1" rows="1" [(ngModel)]="answerOption1" name="answerOption1"></textarea>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="form-group">
-            <label for="answerOption2">Varka 2</label>
-            <textarea class="form-control" id="answerOption2" rows="1" [(ngModel)]="answerOption2" name="answerOption2"></textarea>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="form-group">
-            <label for="answerOption3">Varka 3</label>
-            <textarea class="form-control" id="answerOption3" rows="1" [(ngModel)]="answerOption3" name="answerOption3"></textarea>
-          </div>
-        </div>
-        <!--End of Answer Options-->
-      </div>
-
-      <button class="btn btn-outline-success btn-block" type="submit" (click)="submit()">Dodaj</button>
+      <button class="btn btn-outline-success btn-block" (click)="submit()">Dodaj</button>
 
     </form>
   </div>

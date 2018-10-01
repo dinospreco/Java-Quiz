@@ -1,5 +1,6 @@
 package ba.bildit.javaquizrest.entities;
 
+import ba.bildit.javaquizrest.dto.SectionDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -23,6 +24,10 @@ public class Section {
 
     public Section(String section) {
         this.section = section;
+    }
+
+    public Section(SectionDTO sectionDTO) {
+        this.section = sectionDTO.getSection();
     }
 
     @Override

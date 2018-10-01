@@ -8,11 +8,13 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import {SectionService} from './services/section.service';
 import {HttpClientModule} from '@angular/common/http';
 import {QuestionService} from './services/question.service';
+import { AddAnswersListComponent } from './question/add.answers.ist/add.answers.list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddQuestionComponent
+    AddQuestionComponent,
+    AddAnswersListComponent
   ],
   imports: [
     BrowserModule,
