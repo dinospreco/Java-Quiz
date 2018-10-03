@@ -14,27 +14,59 @@
     </div>
 
     <div class="" (keyup.enter)="addAnswer()">
+      <div class="lg-bg">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">Odgovor:</span>
+          </div>
+          <input #answerElement type="text" class="form-control" id="answer" [(ngModel)]="answer">
 
-      <div class="input-group mb-2">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="">Odgovor:</span>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="correctAnswer" [checked]="correctAnswer" (change)="correctAnswer = !correctAnswer">
+                <label class="form-check-label" for="correctAnswer">Tačan odgovor</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-outline-success" (click)="addAnswer()">Dodaj</button>
+            <button class="btn btn-outline-danger" (click)="removeAnswer()">Izbrisi odgovor</button>
+          </div>
         </div>
-        <input #answerElement type="text" class="form-control" id="answer" [(ngModel)]="answer">
+      </div>
 
-        <div class="input-group-append">
-          <div class="input-group-text">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="correctAnswer" [value]="correctAnswer">
-              <label class="form-check-label" for="correctAnswer">Tačan odgovor</label>
+      <div class="md-xs">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Odgovor:</span>
+          </div>
+          <input #answerElement type="text" class="form-control" id="answer-sm" [(ngModel)]="answer">
+
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="correctAnswer-sm" [checked]="correctAnswer" (change)="correctAnswer = !correctAnswer">
+                <label class="form-check-label" for="correctAnswer-sm">Tačan odgovor</label>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="input-group-append">
-          <button type="submit" class="btn btn-outline-success" (click)="addAnswer()">Dodaj</button>
-          <button class="btn btn-outline-danger" (click)="removeAnswer()">Izbrisi odgovor</button>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend" id="md-xs-btn-succes">
+            <button type="submit" class="btn btn-outline-success btn-block" (click)="addAnswer()">Dodaj</button>
+          </div>
+          <div class="input-group-append" id="md-xs-btn-danger">
+            <button class="btn btn-outline-danger btn-block" (click)="removeAnswer()">Izbrisi odgovor</button>
+          </div>
         </div>
+
       </div>
+
+
+
     </div>
 
   </div>

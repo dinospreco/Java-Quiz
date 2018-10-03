@@ -52,23 +52,61 @@ a {
   margin-bottom: 3%;
 }
 
-.input-range-label {
-  width: 20%;
-}
-
-.input-range-label-text {
-  width: 100px;
-}
-.input-range-text {
-  width: 100%;
-}
-.input-range {
-  width: 80%;
-}
 .input-group-text {
   background-color: white;
 }
 
+.input-range-label-text {
+  width: 100%;
+}
+.input-range-text {
+  width: 100%;
+}
+#input-range {
+  margin-left: 0px;
+}
+
+@media only screen and (max-width: 575px) {
+  .input-range-label {
+    width: 22%;
+  }
+  .input-range {
+    width: 78%;
+  }
+}
+@media only screen and (min-width: 576px) {
+  .input-range-label {
+    width: 20%;
+  }
+  .input-range {
+    width: 80%;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .input-range-label {
+    width: 30%;
+  }
+  .input-range {
+    width: 70%;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .input-range-label {
+    width: 22%;
+  }
+  .input-range {
+    width: 78%;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .input-range-label {
+    width: 18%;
+  }
+  .input-range {
+    width: 82%;
+    margin-right: 0px;
+  }
+}
 
 /* Thumb */
 input[type=range] {
@@ -156,7 +194,6 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
   background: #3fa5ff;
 }
-
 
 /* Track */
 input[type=range] {

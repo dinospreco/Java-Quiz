@@ -38,7 +38,7 @@
             <div class="input-group-prepend input-range-label">
               <label for="difficulty" class="input-group-text input-range-label-text">Težina: {{question.difficulty}}</label>
             </div>
-            <div class="input-group-append input-range">
+            <div class="input-group-append input-range" id="input-range">
               <div class="input-group-text input-range-text">
                 <input type="range" class="" id="difficulty" name="difficulty" min="1" max="5" [(ngModel)]="question.difficulty" (ngModelChange)="difficulty=$event">
               </div>

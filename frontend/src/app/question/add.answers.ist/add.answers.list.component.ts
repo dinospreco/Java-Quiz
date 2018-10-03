@@ -34,12 +34,13 @@ export class AddAnswersListComponent implements OnInit, OnChanges {
     }
   }
   addAnswer() {
-    this.answerElement.first.nativeElement.focus();
     if (this.answer !== null && this.answer !== '') {
       this.answers.push(new Answer(this.answer, this.correctAnswer));
+      console.log('Correct Answer: ' + this.correctAnswer);
     }
     this.resetValues();
     this.setSelectBoxSize();
+    this.answerElement.first.nativeElement.focus();
   }
   resetValues() {
     this.answer = '';
