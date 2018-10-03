@@ -7,32 +7,45 @@
     <div class="container">
       <form>
 
-      <div class="form-group row">
+      <div class="row">
 
-        <!--Section Input-->
-        <label for="section" class="col-md-2 col-form-label">Oblast:</label>
-        <div class="col-md-4" [hidden]="hasNewSection" >
-          <select class="form-control" id="section" name="section" [(ngModel)]="existingSection" (change)="checkIfNewSectionIsBeingAdded()">
-            <option *ngFor="let section of sections" value="{{section.section}}">{{section.section}}</option>
-            <option>{{newSectionOptionText}}</option>
-          </select>
+        <div class="col-md-6" [hidden]="hasNewSection">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" id="sectionLabel" for="section">Oblast:</label>
+            </div>
+            <select class="custom-select" id="section" name="section" [(ngModel)]="existingSection" (change)="checkIfNewSectionIsBeingAdded()">
+              <option *ngFor="let section of sections" value="{{section.section}}">{{section.section}}</option>
+              <option>{{newSectionOptionText}}</option>
+            </select>
+          </div>
         </div>
 
-        <div class="col-md-3" [hidden]="!hasNewSection">
-          <input class="form-control" id="newSection" placeholder="Klikni da uneses novu oblast" [(ngModel)]="newSection" name="newSection">
+        <div class="col-md-6" [hidden]="!hasNewSection">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" id="newSectionLabel" for="newSection">Oblast:</label>
+            </div>
+            <input class="form-control" id="newSection" placeholder="Klikni da uneses novu oblast" [(ngModel)]="newSection" name="newSection">
+            <div class="input-group-append">
+              <button class="btn btn-outline-danger" (mouseup)="cancelNewSection()" [disabled]="noSections">Cancel</button>
+            </div>
+          </div>
         </div>
-        <div class="col-md-1" [hidden]="!hasNewSection">
-          <button class="btn btn-outline-danger" (mouseup)="cancelNewSection()" [disabled]="noSections">Cancel</button>
-        </div>
-        <!--End of Section Input-->
 
-        <!--Difficulty Input-->
-        <label for="difficulty" class="col-md-2 col-form-label">Težina: </label>
-        <div class="col-md-1 difficulty"> {{question.difficulty}} </div>
-        <div class="col-md-3">
-          <input type="range" class="form-control-range" id="difficulty" name="difficulty" min="1" max="5" [(ngModel)]="question.difficulty" (ngModelChange)="difficulty=$event">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend input-range-label">
+              <label for="difficulty" class="input-group-text input-range-label-text">Težina: {{question.difficulty}}</label>
+            </div>
+            <div class="input-group-append input-range">
+              <div class="input-group-text input-range-text">
+                <input type="range" class="" id="difficulty" name="difficulty" min="1" max="5" [(ngModel)]="question.difficulty" (ngModelChange)="difficulty=$event">
+              </div>
+            </div>
+          </div>
         </div>
-        <!--End of Difficulty Input-->
+
       </div>
 
       <div class="row">
@@ -49,26 +62,29 @@
         <!--Snippet Input-->
         <div class="col-md-12 snippet">
           <label for="snippetCode">Snippet</label> <a (click)="toggleSnippetAreaVisibility()"> ({{hideSnippetAreaText}})</a>
-          <ngx-codemirror
-            [(ngModel)]="question.snippet"
-            [options]="{
+            <ngx-codemirror class="CodeMirror"
+              [(ngModel)]="question.snippet"
+              [options]="{
               lineNumbers: true,
-              theme: 'idea',
+              theme: 'default',
               mode: 'text/x-java'
             }"
-            id="snippetCode"
-            name="snippetCode"
-            [hidden] = "hideSnippetArea"
-          ></ngx-codemirror>
+              id="snippetCode"
+              name="snippetCode"
+              [hidden] = "hideSnippetArea"
+            ></ngx-codemirror>
         </div>
         <!--End of Snippet Input-->
 
+        <div class="col-md-12 add-answers">
+          <app-add-answers-list></app-add-answers-list>
+        </div>
+
+        <div class="col-md-12">
+          <button class="btn btn-outline-success btn-block" (click)="submit()">Dodaj</button>
+        </div>
+
       </div>
-
-        <app-add-answers-list></app-add-answers-list>
-
-      <button class="btn btn-outline-success btn-block" (click)="submit()">Dodaj</button>
-
     </form>
   </div>
   </div>

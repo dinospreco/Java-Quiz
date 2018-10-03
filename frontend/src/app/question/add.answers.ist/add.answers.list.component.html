@@ -1,32 +1,41 @@
-<div class="form-group">
-  <label for="answers">Odgovori: </label>
-  <button class="btn btn-outline-danger" (click)="removeAnswer()">Izbrisi odgovor</button>
-  <div class="options" (keyup.delete)="removeAnswer()">
-    <select multiple class="form-control" id="answers" [(ngModel)] = "selectedAnswer" [size]="selectBoxSize">
-      <option *ngFor="let answer of answers" value="{{answer.answer}}">{{answer.answer}}, {{correctAnswerText(answer.correctAnswer)}}</option>
-    </select>
-  </div>
-</div>
-
-
-<div class="form-row align-items-center" (keyup.enter)="addAnswer()">
-  <div class="col-auto">
-    <label class="" for="answer">Odgovor: </label>
-  </div>
-
-  <div class="col-lg-8 col-md-6 col-sm-5">
-    <input #answerElement type="text" class="form-control mb-2" id="answer" [(ngModel)]="answer">
-  </div>
-
-  <div class="col-auto">
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" id="correctAnswer" [(ngModel)]="correctAnswer">
-      <label class="form-check-label" for="correctAnswer">
-        Tačan odgovor?
-      </label>
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <h3>Odgovori</h3>
     </div>
-  </div>
-  <div class="col-auto">
-    <button type="submit" class="btn btn-outline-success mb-2" (click)="addAnswer()">Dodaj</button>
+
+    <div class="form-group">
+      <label for="answers">Uneseni odgovori: </label>
+      <div class="options" (keyup.delete)="removeAnswer()">
+        <select multiple class="form-control no-scroll" id="answers" [(ngModel)] = "selectedAnswer" [size]="selectBoxSize">
+          <option *ngFor="let answer of answers; let i = index" value="{{answer.answer}}"> {{(i+1)}}. {{answer.answer}}, {{correctAnswerText(answer.correctAnswer)}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="" (keyup.enter)="addAnswer()">
+
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">Odgovor:</span>
+        </div>
+        <input #answerElement type="text" class="form-control" id="answer" [(ngModel)]="answer">
+
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="correctAnswer" [value]="correctAnswer">
+              <label class="form-check-label" for="correctAnswer">Tačan odgovor</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-outline-success" (click)="addAnswer()">Dodaj</button>
+          <button class="btn btn-outline-danger" (click)="removeAnswer()">Izbrisi odgovor</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

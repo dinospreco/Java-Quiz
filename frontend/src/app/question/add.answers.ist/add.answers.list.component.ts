@@ -49,6 +49,7 @@ export class AddAnswersListComponent implements OnInit, OnChanges {
     for (let i = 0 ; i < this.selectedAnswer.length ; i++) {
       this.answers = this.answers.filter(answer => answer.answer !== this.selectedAnswer[i]);
     }
+    this.setSelectBoxSize();
   }
   correctAnswerText(isCorrect: boolean): string {
     if (isCorrect) {
